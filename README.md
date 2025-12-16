@@ -54,7 +54,7 @@ http://localhost:PORT/test
 ```
 
 
-(PORT à définir dans le fichier .env)
+(PORT à définir dans le fichier .env.local au même niveau que .env, noter que le .env ici sert de template)
 
 
 

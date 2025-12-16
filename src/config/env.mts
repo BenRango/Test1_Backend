@@ -4,6 +4,9 @@ import path, { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 console.log(dotenv.config({path: path.join(__dirname, '../../.env.local')}));
+if (!process.env.LOCAL_DATABASE_URL && !process.env.DATABASE_URL) {
+    dotenv.config()
+}
 export const runningInDocker = process.env.NODE_ENV === "production" ? true :false
 export const {JWT_SECRET_KEY}= process.env as {JWT_SECRET_KEY: string};
 export const {PORT} = (process.env as {PORT: string});
