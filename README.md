@@ -14,7 +14,7 @@ Backend **Node.js** permettant la gestion des utilisateurs, de l’authentificat
 
 ---
 
-## Prérequis
+## 📋 Prérequis
 
 Avant de commencer, assurez-vous d’avoir installé :
 
@@ -24,7 +24,7 @@ Avant de commencer, assurez-vous d’avoir installé :
 
 ---
 
-## Installation
+## ⚙️ Installation
 
 1. Télécharger le projet (ZIP ou clone Git)
 2. Extraire l’archive si nécessaire
@@ -40,7 +40,7 @@ Installer les dépendances :
 npm install
 ```
 
-## Lancement du serveur
+## ▶️ Lancement du serveur
 
 À la racine du projet (/TestBackend) :
 
@@ -68,7 +68,7 @@ Certaines routes sont protégées par un **middleware d’authentification JWT**
 
 ---
 
-## Authentification
+## 🔐 Authentification
 
 Toutes les routes sensibles sont protégées par un middleware JWT (`authMiddleware`).
 
