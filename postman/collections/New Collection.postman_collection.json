@@ -1,0 +1,130 @@
+{
+  "info": {
+    "_postman_id": "f2c79384-a4ff-4ffa-a971-c0df145df465",
+    "name": "New Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "id": "4c7abaa6-0d16-474b-b434-06a8cc63e730",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Blue\",\r\n    \"email\": \"blue@blue.com\",\r\n    \"phone\": \"0101010101\",\r\n    \"password\": \"10001AHH\",\r\n    \"confirmPassword\": \"10001AHH\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseURL}}/auth/register",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register 2",
+          "id": "71f8e9b5-ec1b-4ffb-a151-68311df394c1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Green\",\r\n    \"email\": \"green@green.com\",\r\n    \"phone\": \"0505050505\",\r\n    \"password\": \"10001AHH\",\r\n    \"confirmPassword\": \"10001AHH\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseURL}}/auth/register",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "id": "83558fc8-3d51-4f55-bf73-b80f492934dd",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/auth/login",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "e8efa024-9361-49d8-b6c5-7816265443a9"
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Auto deposit",
+          "id": "4c90a328-7e35-416e-8dec-ea62374d77bc",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"amount\" : 1500,\r\n    \"type\" : \"deposit\",\r\n    \"currency\": \"XOF\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseURL}}/transactions",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "transactions"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "e19e15af-fbbb-4c22-bf78-68d0fd0ebd1c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "id": "d57c0017-63ad-48b0-877e-84acd511940e",
+      "key": "authToken",
+      "value": ""
+    },
+    {
+      "id": "d01c5527-670d-4ea3-bc00-a1380bbcef5e",
+      "key": "baseURL",
+      "value": ""
+    }
+  ]
+}

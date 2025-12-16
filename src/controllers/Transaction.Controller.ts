@@ -5,6 +5,7 @@ import { Currencies, Transaction, TransactionTypes } from "@models/Transaction.j
 import { UserRepository } from "./Auth.Controller.js";
 import e from "express";
 import { HTTPError } from "../utils/httpError.ts";
+import { UserRoles, type User } from "@models/User.ts";
 
 const queryRunner = AppDataSource.createQueryRunner();
 
@@ -53,12 +54,37 @@ export class TransactionController {
                 res.status(error.status? error.status : 500).json({ message: error.message });
                 return;
             }
-            res.status(500).json({ message: "Internal server error" });
+            res.status(500).json({ error: "Internal server error", message: (error as Error).message });
         } finally{
             //await queryRunner.release();
         }
     }
 
+    static deposit = async (req: Request, res: Response) : Promise<void> => {
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
+        try {
+            const targetUser = await UserRepository.findOne({where: {id: req.params.id!}})
+            if (!targetUser) {
+                res.status(404).json({ message: "Target user not found" });
+                return;
+            }
+            const { amount, currency } = req.body as { amount: number; currency: Currencies };
+            targetUser.creditBalance(amount, currency);
+            await queryRunner.manager.save(targetUser);
+            res.status(201).json({ message: "Deposit transaction created successfully", user: targetUser });
+            await queryRunner.commitTransaction();
+        } catch (error) {
+            await queryRunner.rollbackTransaction()
+            console.error(error);
+            if(error instanceof HTTPError){
+                res.status(error.status? error.status : 500).json({ message: error.message });
+                return;
+            }
+            res.status(500).json({ error: "Internal server error", message: (error as Error).message });
+        }
+        
+    }
     /**
      * 
      * @param req 
@@ -71,7 +97,7 @@ export class TransactionController {
         await queryRunner.connect();
         await queryRunner.startTransaction();
         try {
-            const user = await UserRepository.findOne({where: {id: req.user?.id}})
+            const user = await UserRepository.findOne({where: {id: req.user?.id!}})
             const reciever_id = req.params.id!
             const { amount, currency } = req.body as { amount: number; currency: Currencies };
             const transaction = new Transaction();
@@ -108,7 +134,7 @@ export class TransactionController {
                 return;
             }
             console.error(error);
-            res.status(500).json({ message: "Internal server error" });
+            res.status(500).json({ error: "Internal server error", message: (error as Error).message });
         }
         finally{
             //await queryRunner.release();
@@ -126,7 +152,7 @@ export class TransactionController {
             res.status(200).json({ transactions });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Internal server error" });
+            res.status(500).json({ error: "Internal server error", message: (error as Error).message });
         }
     }
 
@@ -139,13 +165,17 @@ export class TransactionController {
         try {
             const user = req.user!;
             const transactions = await TransactionRepository.find({
-                where: { user: { id: user.id } },
-                relations: ["transactions"]
+                where: [
+                    { user: { id: user.id } },
+                    { sender: { id: user.id } },
+                    { receiver: { id: user.id } }
+                ],
+                loadRelationIds: true
             });
             res.status(200).json({ transactions });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Internal server error" });
+            res.status(500).json({ error: "Internal server error", message: (error as Error).message });
         }
     }
 
@@ -169,7 +199,7 @@ export class TransactionController {
             res.status(200).json({ transactions });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Internal server error" });
+            res.status(500).json({ error: "Internal server error", message: (error as Error).message });
         }
     }
 
@@ -181,8 +211,13 @@ export class TransactionController {
      */
     static details = async (req: Request, res: Response) => {
         try {
+
             const transactionId = req.params.id;
             const transaction = await TransactionRepository.findOneBy({ id: transactionId! });
+            if (req.user.id !== transaction?.user.id && !(req?.user as User).roles.includes(UserRoles.ROLE_ADMIN) && req.user.id !== transaction?.receiver?.id && req.user.id !== transaction?.sender?.id) {
+                res.status(403).json({ message: "Insufficient permissions to perform this action" });
+                return;
+            }
             if (!transaction) {
                 res.status(404).json({ message: "Transaction not found" });
                 return;
@@ -190,7 +225,7 @@ export class TransactionController {
             res.status(200).json({ transaction });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Internal server error" });
+            res.status(500).json({ error: "Internal server error", message: (error as Error).message });
         }
     }
 }

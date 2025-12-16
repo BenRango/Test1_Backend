@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { UserRepository } from "./Auth.Controller.js";
+import type { User } from "@models/User.ts";
 
 export class UserController {
     /**
@@ -60,16 +61,16 @@ export class UserController {
      */
     static deleteUser = async (req: Request, res: Response) => {
         try {
-            const user = await UserRepository.findOneBy({id : req.params.id!});
-            if (!user) {
+            const targetUser = await UserRepository.findOneBy({id : req.params.id!});
+            if (!targetUser) {
                 res.status(404).json({ message: "User not found" });
                 return;
             }
-            await UserRepository.remove(user);
+            await UserRepository.remove(targetUser);
             res.status(200).json({ message: "User deleted successfully" });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Internal server error" });
+            res.status(500).json({ error: "Internal server error", message: (error as Error).message });
         }
     }
     /**
@@ -91,7 +92,7 @@ export class UserController {
             res.status(200).json({ message: "User updated successfully", user: user.toPayload() });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Internal server error" });
+            res.status(500).json({ error: "Internal server error", message: (error as Error).message });
         }
     }
 }

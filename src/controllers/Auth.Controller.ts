@@ -19,7 +19,6 @@ export class AuthController {
             if (!password || !confirmPassword) {
                 res.status(400).json({ message: " 'password' and 'confirmPassword' fields are required" });
                 return 
-
             }
             if(password !== confirmPassword){
                 return  res.status(400).json({ message: "Password and confirm password do not match" });
@@ -38,14 +37,14 @@ export class AuthController {
             res.status(201).json({ message: "User registered successfully", acces_token, user: user.toPayload() });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Internal server error" });
+            res.status(500).json({ error: "Internal server error", message: (error as Error).message });
         }
     }
 
     static login = async (req: Request, res: Response) => {
         try {
             const { email, password } = req.body as {email: string, password: string };
-            const user = await UserRepository.findOneBy({ email });
+            const user = await UserRepository.findOne({ where:  { email }, select:  { password : true } });
             if (!user) {
                 return res.status(401).json({ message: "Invalid credentials" });
             }
@@ -54,10 +53,10 @@ export class AuthController {
                 return res.status(401).json({ message: "Invalid credentials" });
             }
             const acces_token = jwt.sign( user.toPayload() , JWT_SECRET_KEY as string, { expiresIn: '1h' } );
-            res.status(200).json({ message: "Login successful", acces_token });
+            res.status(200).json({ message: "Login successful", acces_token }); 
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Internal server error" });
+            res.status(500).json({ error: "Internal server error", message: (error as Error).message });
         }
     }
 }

@@ -1,4 +1,5 @@
-import { User } from '@model/User';
+import type { User } from '@model/User';
+import type { UserInterface } from '@models/User.ts';
 import { Request } from 'express';
 
 import 'express';

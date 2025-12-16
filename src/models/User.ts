@@ -4,6 +4,12 @@ import { IsEmail, Length,  IsNotEmpty } from "class-validator";
 import type { JwtPayload } from "jsonwebtoken";
 import { Currencies, Transaction } from "./Transaction.js";
 import { HTTPError } from "../utils/httpError.ts";
+export const UserRoles = {
+    ROLE_ADMIN: "ROLE_ADMIN",
+    ROLE_USER: "ROLE_USER"
+} as const;
+
+export type UserRoles = typeof UserRoles[keyof typeof UserRoles]
 
 /**
  * @interface UserInterface
@@ -14,6 +20,7 @@ import { HTTPError } from "../utils/httpError.ts";
  * @property {string}  phone - The phone number of the user
  * @property {string}  [password] - The password for the user account
  * @property {Date}  createdAt - The date the user was created
+ * @property {UserRoles[]}  [role] - The role of the user (e.g., admin, user)
  */
 export interface UserInterface {
     id: string;
@@ -22,6 +29,7 @@ export interface UserInterface {
     phone: string;
     balance : number;
     password: string;
+    roles : UserRoles[]
     createdAt: Date;
 }
 
@@ -74,6 +82,9 @@ export class User implements UserInterface {
     @IsNotEmpty({message : "The 'password' field is required"})
     password!: string
 
+    @Column("simple-array", { default: UserRoles.ROLE_USER })
+    roles: UserRoles[]
+
     @Column("double precision", { default: 0 })
     balance : number
 
@@ -87,7 +98,6 @@ export class User implements UserInterface {
      */
     toPayload() : JwtPayload{
         const payload : JwtPayload = {}
-        
         Object.assign(payload, this)
         delete (payload ).password
         return payload
@@ -152,5 +162,6 @@ export class User implements UserInterface {
 
     constructor(){
         this.balance = 0
+        this.roles = [UserRoles.ROLE_USER]
     }
 }
