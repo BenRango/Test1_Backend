@@ -121,6 +121,7 @@ Toutes les routes ci-dessous nécessitent une authentification.
 
 ```js
 router.use('/auth', authRoutes);
+router.use('/users', usersRoutes);
 router.use('/transactions', transactionsRoutes);
 
 app.use('/test', router);
