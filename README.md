@@ -99,7 +99,7 @@ Toutes les routes ci-dessous nécessitent une authentification.
 | GET | `/user/me` | Récupérer les transactions de l’utilisateur connecté |
 | GET | `/user/:user_id` | Récupérer les transactions d’un utilisateur spécifique |
 | GET | `/:id` | Obtenir les détails d’une transaction |
-| POST | `/transfer/:id` | Effectuer un transfert depuis une transaction |
+| POST | `/transfer/:id` | Effectuer un transfert depuis vers un compte dont on précisera l'id |
 
 ---
 
