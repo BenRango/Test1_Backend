@@ -123,6 +123,6 @@ Toutes les routes ci-dessous nécessitent une authentification.
 router.use('/auth', authRoutes);
 router.use('/transactions', transactionsRoutes);
 
-app.use('/test', routes);
+app.use('/test', router);
 
 
