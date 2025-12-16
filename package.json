@@ -1,0 +1,32 @@
+{
+  "name": "testbackend",
+  "version": "1.0.0",
+  "description": "Projet de test sur les compétences de base en développement backend",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "test",
+    "dev": "npx tsx watch src/index.ts"
+  },
+  "author": "BenRango",
+  "license": "ISC",
+  "dependencies": {
+    "class-validator": "^0.14.3",
+    "cors": "^2.8.5",
+    "pg": "^8.16.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.19",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "typeorm": "^0.3.28"
+  }
+}
