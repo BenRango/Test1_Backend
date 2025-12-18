@@ -7,3 +7,5 @@ router.get("/", UserController.getAllUsers);
 router.get("/:id", UserController.getUserById);
 router.delete("/:id", UserController.deleteUser);
 router.put("/:id", UserController.updateUser);
+
+export default router;

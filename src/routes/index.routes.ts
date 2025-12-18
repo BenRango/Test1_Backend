@@ -4,5 +4,6 @@ const router : Router = Router();
 
 router.use('/auth', await import('./auth.routes.js').then(m => m.default));
 router.use('/transactions', await import('./transactions.routes.js').then(m => m.default));
+router.use('/users', await import('./user.routes.ts').then(m => m.default));
 
 export default router;
