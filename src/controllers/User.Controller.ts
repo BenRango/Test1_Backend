@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
 import { UserRepository } from "./Auth.Controller.js";
-import type { User } from "@models/User.ts";
 
 export class UserController {
     /**

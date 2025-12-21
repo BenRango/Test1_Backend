@@ -163,5 +163,6 @@ export class User implements UserInterface {
     constructor(){
         this.balance = 0
         this.roles = [UserRoles.ROLE_USER]
+        
     }
 }

@@ -1,4 +1,4 @@
-# 💳 TestBackend – API de gestion de transactions
+# TestBackend – API de gestion de transactions
 
 Backend **Node.js** permettant la gestion des utilisateurs, de l’authentification et des transactions (création, consultation, transfert).
 
@@ -14,17 +14,17 @@ Backend **Node.js** permettant la gestion des utilisateurs, de l’authentificat
 
 ---
 
-## 📋 Prérequis
+## Prérequis
 
 Avant de commencer, assurez-vous d’avoir installé :
 
-- ✅ **Node.js** (version récente recommandée)
-- ✅ Une base de données (**PostgreSQL conseillé**)
-- ✅ Un gestionnaire de paquets (`npm` ou `yarn`)
+- **Node.js** (version récente recommandée)
+-  Une base de données (**PostgreSQL conseillé**)
+-  Un gestionnaire de paquets (`npm` ou `yarn`)
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 1. Télécharger le projet (ZIP ou clone Git)
 2. Extraire l’archive si nécessaire
@@ -40,7 +40,7 @@ Installer les dépendances :
 npm install
 ```
 
-## ▶️ Lancement du serveur
+## Lancement du serveur
 
 À la racine du projet (/TestBackend) :
 
@@ -58,7 +58,7 @@ http://localhost:PORT/test
 
 
 
-## 📌 Endpoints de l’API
+## Endpoints de l’API
 
 Toutes les routes de l’API sont accessibles via le préfixe : `/test`
 
@@ -68,7 +68,7 @@ Certaines routes sont protégées par un **middleware d’authentification JWT**
 
 ---
 
-## 🔐 Authentification
+## Authentification
 
 Toutes les routes sensibles sont protégées par un middleware JWT (`authMiddleware`).
 
@@ -87,7 +87,7 @@ Authorization: Bearer <token>
 
 ---
 
-## 💳 Transactions
+## Transactions
 
 **Base URL :** `/test/transactions`  
 Toutes les routes ci-dessous nécessitent une authentification.
@@ -103,21 +103,21 @@ Toutes les routes ci-dessous nécessitent une authentification.
 
 ---
 
-## 👤 Utilisateurs
+## Utilisateurs
 
 **Base URL :** `/test/users`
 
 | Méthode | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
-| GET | `/me` | ✅ | Récupérer le profil de l’utilisateur connecté |
-| GET | `/` | ❌ | Récupérer la liste de tous les utilisateurs |
-| GET | `/:id` | ❌ | Récupérer un utilisateur par son ID |
-| PUT | `/:id` | ❌ | Mettre à jour les informations d’un utilisateur |
-| DELETE | `/:id` | ❌ | Supprimer un utilisateur |
+| GET | `/me` | Oui | Récupérer le profil de l’utilisateur connecté |
+| GET | `/` | Non | Récupérer la liste de tous les utilisateurs |
+| GET | `/:id` | Non | Récupérer un utilisateur par son ID |
+| PUT | `/:id` | Non | Mettre à jour les informations d’un utilisateur |
+| DELETE | `/:id` | Non | Supprimer un utilisateur |
 
 ---
 
-## 🗂️ Organisation des routes
+## Organisation des routes
 
 ```js
 router.use('/auth', authRoutes);

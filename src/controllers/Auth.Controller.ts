@@ -8,6 +8,12 @@ import { validate } from "class-validator";
 
 export const UserRepository = AppDataSource.getRepository(User)
 export class AuthController {
+    /**
+     * @description Register a new user
+     * @param req 
+     * @param res 
+     * @returns 
+     */
     static register =  async (req: Request, res: Response) => {
         try {
             const existingUser = await UserRepository.findOneBy({ email: req.body.email });
@@ -41,6 +47,12 @@ export class AuthController {
         }
     }
 
+    /**
+     * @description Login a user
+     * @param req 
+     * @param res 
+     * @returns 
+     */
     static login = async (req: Request, res: Response) => {
         try {
             const { email, password } = req.body as {email: string, password: string };
