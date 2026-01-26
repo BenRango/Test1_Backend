@@ -3,7 +3,7 @@ import http from "http"
 const options = {
     host: 'localhost',
     port: 3000,
-    path: '/moneytransfer/api/v1/health', 
+    path: '/api/v1/health', 
     timeout: 2000
 };
 

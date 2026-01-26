@@ -4,8 +4,8 @@ import app from "./app.js"
 describe('Tests de l\'api Backend', () => {
 
   
-  test('GET /moneytransfer/api/v1/health devrait retourner 200 OK', async () => {
-    const response = await request(app).get('/moneytransfer/api/v1/health');
+  test('GET /api/v1/health devrait retourner 200 OK', async () => {
+    const response = await request(app).get('/api/v1/health');
     
     expect(response.statusCode).toBe(200);
     expect(response.body.status).toBe('UP');
