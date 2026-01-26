@@ -4,13 +4,12 @@ services:
   app:
     image:  benrango/moneytransfer-server
     ports:
-      - "3701:3000"
+      - "3700:3800"
     environment:
-      PORT: 3000
+      PORT: 3800
       NODE_ENV: production
       LOCAL_DATABASE_URL: postgres://postgres:cocojojo1245@localhost:5433/test?sslmode=disable
-      
-      DATABASE_URL=postgres: //postgres:actu-science123@actuscientifique.com:5432/moneytransfer?sslmode=disable
+      DATABASE_URL: postgres://postgres:actu-science123@actuscientifique.com:5432/moneytransfer?sslmode=disable
       JWT_SECRET_KEY: fz679fkfrLKFZpopef5449z8
 
     deploy:
@@ -25,7 +24,7 @@ services:
         max_attempts: 3
 
     healthcheck:
-      test: ["CMD", "node", "dist/healthcheck.js"] 
+      test: ["CMD", "node", "dist/healthcheck.js"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -37,8 +36,8 @@ services:
       - source: database_url
         target: /run/secrets/database_url
 
-secrets: 
-  jwt_key:  
+secrets:
+  jwt_key:
     external: true
-  database_url: 
+  database_url:
     external: true
