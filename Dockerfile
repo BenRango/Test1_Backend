@@ -30,6 +30,6 @@ COPY --from=builder /app/.env* ./.env.local
 RUN mkdir -p /app/dist/downloads/productImages /app/dist/downloads/multimedia /app/dist/downloads/articleIllustrations 
 
 
-EXPOSE 3000
+EXPOSE 3800
 
 CMD ["npm","run" , "start"]
