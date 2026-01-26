@@ -13,8 +13,13 @@ Backend **Node.js** permettant la gestion des utilisateurs, de l’authentificat
 - **Middleware de protection des routes**
 
 ---
+## Utilisation en ligge
 
-## Prérequis
+Pour une utilisation Plung & Play voici l'url de l'API : https://moneytf.benrango.com/api/v1
+
+---
+
+## Prérequis pour une utilisation personnelle
 
 Avant de commencer, assurez-vous d’avoir installé :
 
