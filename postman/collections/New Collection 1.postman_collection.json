@@ -1,0 +1,32 @@
+{
+  "info": {
+    "_postman_id": "c01632a3-cea2-4172-a8d0-c3daa44e0130",
+    "name": "Todo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "New Request",
+          "id": "3ff24084-5f34-4b26-9763-18e2fd6e517c",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "359487dc-8333-43b9-826a-71bfe04239a1"
+    },
+    {
+      "name": "New Folder",
+      "item": [],
+      "id": "aaae25dc-5655-4ca0-ae49-aaf3eac2b572"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { UserRoles, type User } from "@models/User.ts";
+import { UserRoles, type User } from "@models/User.js";
 import type { Request, Response } from "express";
 
 export async function isAdmin(req: Request, res: Response, next: Function) {

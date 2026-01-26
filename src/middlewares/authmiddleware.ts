@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { User } from "@models/User.js";
 import { AppDataSource } from "../config/data-source.js";
-import { JWT_SECRET_KEY } from "@config/env.mjs";
+import { JWT_SECRET_KEY } from "@config/env.js"
 
 export const authMiddleware = async (
   req: Request,

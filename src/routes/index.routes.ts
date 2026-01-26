@@ -1,9 +1,14 @@
+import { health } from "@controllers/Health.Controller.js";
+import authRoutes from './auth.routes.js';
+import userRoutes from './user.routes.js';
+import transactionsRoutes from "./transactions.routes.js"
 import { Router } from "express";
 
 const router : Router = Router();
 
-router.use('/auth', await import('./auth.routes.js').then(m => m.default));
-router.use('/transactions', await import('./transactions.routes.js').then(m => m.default));
-router.use('/users', await import('./user.routes.ts').then(m => m.default));
+router.use('/auth', authRoutes);
+router.get('/health', health)
+router.use('/transactions', transactionsRoutes);
+router.use('/users', userRoutes);
 
 export default router;

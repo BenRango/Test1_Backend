@@ -1,16 +1,12 @@
 import 'reflect-metadata';
 
 import { DataSource } from 'typeorm';
-import { fileURLToPath } from 'url';
-import * as path from "path"
-import { dirname } from 'path';
-import { Transaction } from '../models/Transaction.js'; // Ajustez le chemin si nécessaire
+import { Transaction } from '../models/Transaction.js'; 
 import { User } from '../models/User.js';
-import { DATABASE_URL, LOCAL_DATABASE_URL, runningInDocker } from "./env.mjs";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const modelsPath = path.join(__dirname, '..', 'models/*.{ts,js}');
-const migrationsPath = path.join(__dirname, '..', 'migrations/*.{ts,js}');
+import { DATABASE_URL, LOCAL_DATABASE_URL, runningInDocker, testingMode } from "./env.js";
+import { migrationsPath, modelsPath } from '@/utils/paths.js';
+
+
 
 
 if (!DATABASE_URL) {
@@ -18,13 +14,23 @@ if (!DATABASE_URL) {
 }
 
 
-export const AppDataSource = new DataSource({
+export const AppDataSource = testingMode? 
+    new DataSource({
+        type: 'sqlite',
+        database: './database.sqlite',
+        synchronize: true,     
+        logging: true,
+        entities: [User, Transaction],
+        migrations: [migrationsPath],
+    })
+
+    : new DataSource({
     type: 'postgres',
     url: runningInDocker? DATABASE_URL : LOCAL_DATABASE_URL,
     extra:{
         ssl:false
     },
-    synchronize: true,
+    synchronize: false,
     logging: true,
     entities: [User, Transaction],
     subscribers: [],

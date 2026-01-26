@@ -1,9 +1,10 @@
 import "reflect-metadata";
+
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { IsEmail, Length,  IsNotEmpty } from "class-validator";
 import type { JwtPayload } from "jsonwebtoken";
 import { Currencies, Transaction } from "./Transaction.js";
-import { HTTPError } from "../utils/httpError.ts";
+import { HTTPError } from "../utils/httpError.js";
 export const UserRoles = {
     ROLE_ADMIN: "ROLE_ADMIN",
     ROLE_USER: "ROLE_USER"
@@ -20,7 +21,7 @@ export type UserRoles = typeof UserRoles[keyof typeof UserRoles]
  * @property {string}  phone - The phone number of the user
  * @property {string}  [password] - The password for the user account
  * @property {Date}  createdAt - The date the user was created
- * @property {UserRoles[]}  [role] - The role of the user (e.g., admin, user)
+ * @property {UserRoles[]}  [roles] - The role of the user (e.g., admin, user)
  */
 export interface UserInterface {
     id: string;

@@ -1,9 +1,9 @@
-import { User } from "@models/User.js";
+import {User}  from "@models/User.js";
 import type { Request, Response } from "express";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { AppDataSource } from "@config/data-source.js";
-import { JWT_SECRET_KEY } from "@config/env.mjs";
+import { JWT_SECRET_KEY } from "@config/env.js";
 import { validate } from "class-validator";
 
 export const UserRepository = AppDataSource.getRepository(User)
@@ -38,9 +38,9 @@ export class AuthController {
                 res.status(400).json({errors : errors.map(error =>{return error.constraints})})
                 return;
             }
-            const acces_token = jwt.sign( user.toPayload() , JWT_SECRET_KEY as string, { expiresIn: '1h' } );
+            const access_token = jwt.sign( user.toPayload() , JWT_SECRET_KEY as string, { expiresIn: '1h' } );
             await UserRepository.save(user);
-            res.status(201).json({ message: "User registered successfully", acces_token, user: user.toPayload() });
+            res.status(201).json({ message: "User registered successfully", access_token, user: user.toPayload() });
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: "Internal server error", message: (error as Error).message });
@@ -64,8 +64,8 @@ export class AuthController {
             if (!authanticated) {
                 return res.status(401).json({ message: "Invalid credentials" });
             }
-            const acces_token = jwt.sign( user.toPayload() , JWT_SECRET_KEY as string, { expiresIn: '1h' } );
-            res.status(200).json({ message: "Login successful", acces_token }); 
+            const access_token = jwt.sign( user.toPayload() , JWT_SECRET_KEY as string, { expiresIn: '1h' } );
+            res.status(200).json({ message: "Login successful", access_token }); 
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: "Internal server error", message: (error as Error).message });

@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  app:
+    image:  benrango/moneytransfer-server
+    ports:
+      - "80:3000"
+    environment:
+      PORT: 3000
+      NODE_ENV: production
+      LOCAL_DATABASE_URL: postgres://postgres:cocojojo1245@localhost:5433/test?sslmode=disable
+      
+      DATABASE_URL=postgres: //postgres:actu-science123@actuscientifique.com:5432/moneytransfer?sslmode=disable
+      JWT_SECRET_KEY: fz679fkfrLKFZpopef5449z8
+
+    deploy:
+      replicas: 2
+      update_config:
+        order: start-first
+        failure_action: rollback
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+
+    healthcheck:
+      test: ["CMD", "node", "dist/healthcheck.js"] 
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+    secrets:
+      - source: jwt_key
+        target: /run/secrets/jwt_key
+      - source: database_url
+        target: /run/secrets/database_url
+
+secrets: 
+  jwt_key:  
+    external: true
+  database_url: 
+    external: true

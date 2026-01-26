@@ -3,9 +3,8 @@ import type { Request, Response } from "express";
 import { AppDataSource } from "../config/data-source.js";
 import { Currencies, Transaction, TransactionTypes } from "@models/Transaction.js";
 import { UserRepository } from "./Auth.Controller.js";
-import e from "express";
-import { HTTPError } from "../utils/httpError.ts";
-import { UserRoles, type User } from "@models/User.ts";
+import { HTTPError } from "../utils/httpError.js";
+import { UserRoles, type User } from "@models/User.js";
 
 const queryRunner = AppDataSource.createQueryRunner();
 
@@ -214,7 +213,7 @@ export class TransactionController {
 
             const transactionId = req.params.id;
             const transaction = await TransactionRepository.findOneBy({ id: transactionId! });
-            if (req.user.id !== transaction?.user.id && !(req?.user as User).roles.includes(UserRoles.ROLE_ADMIN) && req.user.id !== transaction?.receiver?.id && req.user.id !== transaction?.sender?.id) {
+            if (req.user?.id !== transaction?.user.id && !(req?.user as User).roles.includes(UserRoles.ROLE_ADMIN) && req.user?.id !== transaction?.receiver?.id && req.user?.id !== transaction?.sender?.id) {
                 res.status(403).json({ message: "Insufficient permissions to perform this action" });
                 return;
             }
