@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use('/moneytransfer/api/v1', routes ); 
+app.use('/api/v1', routes ); 
 app.use('', (req, res) => {
     console.log(`${req.method} ${req.url}`);
     res.status(404).send('Not Found');
