@@ -35,8 +35,6 @@ jobs:
           host: ${{ secrets.SSH_HOST_DEPLOY }}
           username: ${{ secrets.SSH_USERNAME_DEPLOY }}
           key: ${{ secrets.SSH_PRIVATE_KEY_DEPLOY }}
-          debug: true
-          port: 2222
           script: |
             echo "Connected to VPS, pulling image and restarting container..."
             docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}
