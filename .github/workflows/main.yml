@@ -18,6 +18,8 @@ jobs:
 
       - run: npm ci
 
+      - run: npm i ts-node
+
       - name: Global tests
         run: npm run test
 
