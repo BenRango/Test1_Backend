@@ -103,6 +103,30 @@
         }
       ],
       "id": "e19e15af-fbbb-4c22-bf78-68d0fd0ebd1c"
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Fetch em all",
+          "id": "5097ce70-4321-4c3f-85ac-ddcd9ded1af2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseUrl}}/users",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "21bee203-0f19-4803-a70f-7c3ea4c0ef30"
     }
   ],
   "auth": {
@@ -117,12 +141,12 @@
   },
   "variable": [
     {
-      "id": "d57c0017-63ad-48b0-877e-84acd511940e",
+      "id": "cbeac685-a87b-4a9a-beca-14abed580c9c",
       "key": "authToken",
       "value": ""
     },
     {
-      "id": "d01c5527-670d-4ea3-bc00-a1380bbcef5e",
+      "id": "f6b1bb3b-9cbb-401b-9855-f1790f7249e3",
       "key": "baseURL",
       "value": ""
     }

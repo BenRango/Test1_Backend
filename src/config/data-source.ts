@@ -30,7 +30,7 @@ export const AppDataSource = testingMode?
     extra:{
         ssl:false
     },
-    synchronize: false,
+    synchronize: true,
     logging: true,
     entities: [User, Transaction],
     subscribers: [],

@@ -6,6 +6,27 @@ on:
       - main 
 
 jobs:
+  ci:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Unit tests
+        run: npm run test:unit
+
+      - name: Integration tests
+        run: npm run test:integration
+
+      - name: Build
+        run: npm run build
+
   build-and-push:
     runs-on: ubuntu-22.04 
 
@@ -27,7 +48,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:latest
   
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
@@ -39,5 +62,6 @@ jobs:
             echo "Connected to VPS, pulling image and restarting container..."
             docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}
             cd /git/MoneyTransfer
+            export IMAGE_TAG=${{ github.sha }}
             docker stack deploy -c stack.yml moneytransfer 
     
