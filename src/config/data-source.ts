@@ -9,7 +9,7 @@ import { migrationsPath, modelsPath } from '@/utils/paths.js';
 
 
 
-if (!DATABASE_URL) {
+if ( !testingMode && !DATABASE_URL) {
     throw new Error("DATABASE_URL est undefined. Veuillez vérifier votre fichier .env");
 }
 
