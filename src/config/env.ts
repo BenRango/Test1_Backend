@@ -13,7 +13,7 @@ export const runningInDocker = process.env.NODE_ENV === "production" ? true :fal
 export const testingMode = process.env.NODE_ENV === "test" ? true : false
 
 export const { TEST_DATABASE_URL } = process.env as {TEST_DATABASE_URL: string};
-export const {JWT_SECRET_KEY}= process.env as {JWT_SECRET_KEY: string};
+export const JWT_SECRET_KEY= process.env.JWT_SECRET_KEY 
 export const {PORT} = (process.env as {PORT: string});
 
 //export const {HOST} = runningInDocker ? process.env as {HOST: string} : {HOST: "localhost:"+PORT};
