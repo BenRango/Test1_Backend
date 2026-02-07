@@ -64,7 +64,7 @@ export class AuthController {
             if (!authanticated) {
                 return res.status(401).json({ message: "Invalid credentials" });
             }
-            const access_token = jwt.sign( user.toPayload() , JWT_SECRET_KEY as string, { expiresIn: '1h' } );
+            const access_token = jwt.sign( user.toPayload() , JWT_SECRET_KEY || "JWT_SECRET_KEY", { expiresIn: '1h' } );
             res.status(200).json({ message: "Login successful", access_token }); 
         } catch (error) {
             console.error(error);

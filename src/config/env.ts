@@ -5,7 +5,11 @@ import { fileURLToPath } from "node:url";
 const filename = fileURLToPath(import.meta.url);
 const _dirname = path.dirname(filename);
 
-console.log(dotenv.config({path: path.join(_dirname, '..','..', '.env.local' )}));
+try {
+    console.log(dotenv.config({path: path.join(_dirname, '..','..', '.env.local' )}));
+} catch (error) {
+    console.log(dotenv.config({path: path.join(_dirname, '..','..', '.env' )}));
+}
 if (!process.env.LOCAL_DATABASE_URL && !process.env.DATABASE_URL) {
     dotenv.config()
 }
