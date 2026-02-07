@@ -38,7 +38,7 @@ export class AuthController {
                 res.status(400).json({errors : errors.map(error =>{return error.constraints})})
                 return;
             }
-            const access_token = jwt.sign( user.toPayload() , JWT_SECRET_KEY as string, { expiresIn: '1h' } );
+            const access_token = jwt.sign( user.toPayload() , JWT_SECRET_KEY as string || "JWT_SECRET_KEY", { expiresIn: '1h' } );
             await UserRepository.save(user);
             res.status(201).json({ message: "User registered successfully", access_token, user: user.toPayload() });
         } catch (error) {
