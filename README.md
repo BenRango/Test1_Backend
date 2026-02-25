@@ -100,6 +100,7 @@ Toutes les routes ci-dessous nécessitent une authentification.
 | Méthode | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/` | Créer une nouvelle transaction |
+| POST | `/deposit` | Faire un dépôt |
 | GET | `/` | Récupérer toutes les transactions |
 | GET | `/user/me` | Récupérer les transactions de l’utilisateur connecté |
 | GET | `/user/:user_id` | Récupérer les transactions d’un utilisateur spécifique |
@@ -122,13 +123,5 @@ Toutes les routes ci-dessous nécessitent une authentification.
 
 ---
 
-## Organisation des routes
-
-```js
-router.use('/auth', authRoutes);
-router.use('/users', usersRoutes);
-router.use('/transactions', transactionsRoutes);
-
-app.use('/test', router);
 
 
