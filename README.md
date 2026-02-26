@@ -55,7 +55,7 @@ npm run dev
 
 Le serveur sera accessible par défaut à l’adresse :
 ```bash 
-http://localhost:PORT/test
+http://localhost:PORT/api/v1/
 ```
 
 
@@ -65,7 +65,7 @@ http://localhost:PORT/test
 
 ## Endpoints de l’API
 
-Toutes les routes de l’API sont accessibles via le préfixe : `/test`
+Toutes les routes de l’API sont accessibles via le préfixe : `/api/v1/`
 
 
 Certaines routes sont protégées par un **middleware d’authentification JWT** et nécessitent l’envoi d’un token valide dans le header :
@@ -83,7 +83,7 @@ L’utilisateur doit être connecté et fournir un token valide dans l’en-têt
 Authorization: Bearer <token>
 ```
 
-**Base URL :** `/test/auth`
+**Base URL :** `/api/v1//auth`
 
 | Méthode | Endpoint | Description |
 |--------|----------|-------------|
@@ -94,7 +94,7 @@ Authorization: Bearer <token>
 
 ## Transactions
 
-**Base URL :** `/test/transactions`  
+**Base URL :** `/api/v1//transactions`  
 Toutes les routes ci-dessous nécessitent une authentification.
 
 | Méthode | Endpoint | Description |
@@ -111,7 +111,7 @@ Toutes les routes ci-dessous nécessitent une authentification.
 
 ## Utilisateurs
 
-**Base URL :** `/test/users`
+**Base URL :** `/api/v1//users`
 
 | Méthode | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
