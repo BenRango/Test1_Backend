@@ -83,7 +83,7 @@ L’utilisateur doit être connecté et fournir un token valide dans l’en-têt
 Authorization: Bearer <token>
 ```
 
-**Base URL :** `/api/v1//auth`
+**Base URL :** `/api/v1/auth`
 
 | Méthode | Endpoint | Description |
 |--------|----------|-------------|
@@ -94,7 +94,7 @@ Authorization: Bearer <token>
 
 ## Transactions
 
-**Base URL :** `/api/v1//transactions`  
+**Base URL :** `/api/v1/transactions`  
 Toutes les routes ci-dessous nécessitent une authentification.
 
 | Méthode | Endpoint | Description |
@@ -111,7 +111,7 @@ Toutes les routes ci-dessous nécessitent une authentification.
 
 ## Utilisateurs
 
-**Base URL :** `/api/v1//users`
+**Base URL :** `/api/v1/users`
 
 | Méthode | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
