@@ -24,9 +24,62 @@
       "id": "359487dc-8333-43b9-826a-71bfe04239a1"
     },
     {
-      "name": "New Folder",
-      "item": [],
+      "name": "Auth",
+      "item": [
+        {
+          "name": "register",
+          "id": "189707bb-e133-44dd-8fe9-3c9990bb4752",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"srangoelie@benrango.com\",\r\n    \"username\": \"benrango\",\r\n    \"password\": \"10001AHH\",\r\n    \"confirmPassword\": \"10001AHH\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local_url}}/auth/register",
+              "host": [
+                "{{local_url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "id": "88e96a55-815b-463e-b955-1593b3978996",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ],
       "id": "aaae25dc-5655-4ca0-ae49-aaf3eac2b572"
+    },
+    {
+      "name": "New Request",
+      "id": "e56f7f53-33b2-4a6b-a815-ef9f963a71aa",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
     }
   ]
 }
